@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mockstation Static Test Page</title>
+        <style>
+            body {
+                font-family: system-ui, sans-serif;
+                max-width: 600px;
+                margin: 60px auto;
+                padding: 0 20px;
+            }
+
+            .ok {
+                background: #e6f4ea;
+                color: #1e7e34;
+                padding: 12px 16px;
+                border-radius: 6px;
+            }
+
+            code {
+                background: #eee;
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Mockstation</h1>
+        <p class="ok">Static file delivery is working.</p>
+        <p>Served from <code>{testCaseDirectory}/static/index.html</code> at <code>GET
+            /static/index.html</code>.</p>
+
+        <h2>WebView + JS Interface Test</h2>
+        <button onclick="testBridge()">Test JS Bridge</button>
+        <pre id="out" style="background:#eee;padding:12px;border-radius:4px;min-height:2em;"></pre>
+
+        <script>
+            function testBridge() {
+                var el = document.getElementById('out');
+                if (window.MockstationBridge && typeof window.MockstationBridge.ping === 'function') {
+                    el.textContent = 'Bridge: ' + window.MockstationBridge.ping();
+                } else {
+                    el.textContent = 'MockstationBridge not available (not in WebView).';
+                }
+            }
+        </script>
+    </body>
+
+</html>
